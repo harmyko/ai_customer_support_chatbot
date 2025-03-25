@@ -31,12 +31,21 @@ public class UserController {
     }
     
     @PutMapping("/update/{id}")
-    public String updateUserById(@PathVariable int id, @RequestBody User user) {
+    public String updateUser(@PathVariable int id, @RequestBody User user) {
     	if (userService.updateUser(id, user) == null) {
     		return "User not found with ID: " + id;
     	}
     	
     	return "User [ID=" + id + "] has successfully been updated.";
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable int id) {
+    	if (!userService.deleteUser(id)) {
+    		return "User not found with ID: " + id;
+    	}
+    	
+    	return "User [ID=" + id + "] has successfully been deleted.";
     }
 
 }
